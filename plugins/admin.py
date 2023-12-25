@@ -8,7 +8,7 @@ MAX_FILE_SIZE = 2 * 1024 * 1024 * 1024  # 2 GB in bytes
 
 # ... [your existing imports and configurations] ...
 
-@Client.on_message(filters.private & filters.user(ADMIN) & filters.command(["start"]))
+@Client.on_message(filters.private & filters.user(ADMIN) & filters.command(["limit1"]))
 async def start(client, message):
     # [Your existing code for the start command]
     pass
