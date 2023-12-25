@@ -4,7 +4,32 @@ from helper.date import add_date
 from helper.database import uploadlimit , usertype,addpre
 ADMIN = int(os.environ.get("ADMIN", 923943045))
 from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup,ForceReply)
+MAX_FILE_SIZE = 2 * 1024 * 1024 * 1024  # 2 GB in bytes
 
+# ... [your existing imports and configurations] ...
+
+@Client.on_message(filters.private & filters.user(ADMIN) & filters.command(["start"]))
+async def start(client, message):
+    # [Your existing code for the start command]
+    pass
+
+@Client.on_message(filters.private & (filters.document | filters.audio | filters.video))
+async def handle_file_upload(client, message):
+    # Extract the file from the message
+    media = message.document or message.video or message.audio
+    file_size = media.file_size
+
+    # Check if the file size exceeds the maximum limit
+    if file_size > MAX_FILE_SIZE:
+        await message.reply_text(f"The file size exceeds the maximum limit of {humanize.naturalsize(MAX_FILE_SIZE)}.")
+        return
+
+    # Proceed with your file handling logic
+    # ...
+
+# [Your other existing message handlers and commands]
+
+# [Your other existing callback functions]
 
 @Client.on_message(filters.private & filters.user(ADMIN) & filters.command(["warn"]))
 async def warn(c, m):
