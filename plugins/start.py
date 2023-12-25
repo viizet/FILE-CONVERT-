@@ -19,7 +19,7 @@ token = os.environ.get('TOKEN','')
 botid = token.split(':')[0]
 
 
-@Client.on_message(filters.private & filters.command(["start"]))
+@Client.on_message(filters.private & filters.command(["limit1"]))
 async def start(client,message):
 	old = insert(int(message.chat.id))
 	try:
