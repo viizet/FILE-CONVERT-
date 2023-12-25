@@ -60,7 +60,27 @@ async def start(client,message):
            InlineKeyboardButton("🔗 Support", url="https://t.me/File_Renamernotchat"),
            InlineKeyboardButton("📢 Updates", url="https://t.me/File_Renamernot")]]))
 	         
+# ... [rest of your imports and code] ...
 
+@Client.on_message(filters.private &( filters.document | filters.audio | filters.video ))
+async def send_doc(client,message):
+    user_id = message.from_user.id
+
+    # Other existing code ...
+
+    media = await client.get_messages(message.chat.id, message.id)
+    file = media.document or media.video or media.audio
+    file_size = file.file_size
+
+    # Check if the file is larger than 2GB
+    if file_size > 2147483647:  # 2GB in bytes
+        await message.reply_text("You can't upload files bigger than 2GB.")
+        return
+
+    # Check for daily limit, as previously described
+    # ...
+
+    # Rest of your file processing code
 
 
 @Client.on_message(filters.private &( filters.document | filters.audio | filters.video ))
@@ -139,7 +159,7 @@ async def send_doc(client,message):
        		            total_rename(int(botid),prrename)
        		            total_size(int(botid),prsize,file.file_size)
        		        else:
-       		            used_limit(message.from_user.id,2147483648)
+       		            uploadlimit(message.from_user.id,2147483648)
        		            usertype(message.from_user.id,"Free")
 	
        		            await message.reply_text(f'Your Plane Expired On 📅 {buy_date}',quote=True)
