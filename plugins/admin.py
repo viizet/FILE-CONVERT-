@@ -4,14 +4,6 @@ from helper.date import add_date
 from helper.database import uploadlimit , usertype,addpre
 ADMIN = int(os.environ.get("ADMIN", 923943045))
 from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup,ForceReply)
-MAX_FILE_SIZE = 2 * 1024 * 1024 * 1024  # 2 GB in bytes
-
-# ... [your existing imports and configurations] ...
-
-@Client.on_message(filters.private & filters.user(ADMIN) & filters.command(["limit1"]))
-async def start(client, message):
-    # [Your existing code for the start command]
-    pass
 
 @Client.on_message(filters.private & (filters.document | filters.audio | filters.video))
 async def handle_file_upload(client, message):
