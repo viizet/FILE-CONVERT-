@@ -25,7 +25,7 @@ async def start(client,message):
 	try:
 	    id = message.text.split(' ')[1]
 	except:
-	    await message.reply_text(text =f"""Hello 👋 {message.from_user.first_name},\n\nI'm File Rename Bot, Please Sent Me Any Telegram Document Or Video And Enter New Filename To Rename It.""",
+	    await message.reply_text(text =f"""Hello👋✅ 👋 {message.from_user.first_name},\n\nI'm File Rename Bot, Please Sent Me Any Telegram Document Or Video And Enter New Filename To Rename It.""",
 	reply_to_message_id = message.id ,  
 	reply_markup=InlineKeyboardMarkup([[
 	   InlineKeyboardButton("👨‍💻 Developer", url="https://t.me/viizet") 
