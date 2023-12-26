@@ -19,7 +19,7 @@ token = os.environ.get('TOKEN','')
 botid = token.split(':')[0]
 
 
-@Client.on_message(filters.private & filters.command(["limit1"]))
+@Client.on_message(filters.private & filters.command(["start"]))
 async def start(client,message):
 	old = insert(int(message.chat.id))
 	try:
@@ -60,52 +60,7 @@ async def start(client,message):
            InlineKeyboardButton("🔗 Support", url="https://t.me/File_Renamernotchat"),
            InlineKeyboardButton("📢 Updates", url="https://t.me/File_Renamernot")]]))
 	         
-# ... [rest of your imports and code] ...
-MAX_FILE_SIZE = 2 * 1024 * 1024 * 1024  # 2 GB in bytes
 
-# ... [your existing imports and configurations] ...
-
-@Client.on_message(filters.private & filters.user(ADMIN) & filters.command(["start"]))
-async def start(client, message):
-    # [Your existing code for the start command]
-    pass
-
-@Client.on_message(filters.private & (filters.document | filters.audio | filters.video))
-async def handle_file_upload(client, message):
-    # Extract the file from the message
-    media = message.document or message.video or message.audio
-    file_size = media.file_size
-
-    # Check if the file size exceeds the maximum limit
-    if file_size > MAX_FILE_SIZE:
-        await message.reply_text(f"The file size exceeds the maximum limit of {humanize.naturalsize(MAX_FILE_SIZE)}.")
-        return
-
-    # Proceed with your file handling logic
-    # ...
-
-# [Your other existing message handlers and commands]
-
-# [Your other existing callback functions]
-@Client.on_message(filters.private &( filters.document | filters.audio | filters.video ))
-async def send_doc(client,message):
-    user_id = message.from_user.id
-
-    # Other existing code ...
-
-    media = await client.get_messages(message.chat.id, message.id)
-    file = media.document or media.video or media.audio
-    file_size = file.file_size
-
-    # Check if the file is larger than 2GB
-    if file_size > 2147483647:  # 2GB in bytes
-        await message.reply_text("You can't upload files bigger than 2GB.")
-        return
-
-    # Check for daily limit, as previously described
-    # ...
-
-    # Rest of your file processing code
 
 
 @Client.on_message(filters.private &( filters.document | filters.audio | filters.video ))
@@ -158,7 +113,7 @@ async def send_doc(client,message):
        		file = media.document or media.video or media.audio 
        		dcid = FileId.decode(file.file_id).dc_id
        		filename = file.file_name
-       		value = 2147483648
+       		value = 6442450944
        		used_ = find_one(message.from_user.id)
        		used = used_["used_limit"]
        		limit = used_["uploadlimit"]
@@ -184,7 +139,7 @@ async def send_doc(client,message):
        		            total_rename(int(botid),prrename)
        		            total_size(int(botid),prsize,file.file_size)
        		        else:
-       		            uploadlimit(message.from_user.id,2147483648)
+       		            uploadlimit(message.from_user.id,6442450944)
        		            usertype(message.from_user.id,"Free")
 	
        		            await message.reply_text(f'Your Plane Expired On 📅 {buy_date}',quote=True)
