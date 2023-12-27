@@ -113,7 +113,7 @@ async def send_doc(client,message):
        		file = media.document or media.video or media.audio 
        		dcid = FileId.decode(file.file_id).dc_id
        		filename = file.file_name
-       		value = 2147483648
+       		value = 6442450944
        		used_ = find_one(message.from_user.id)
        		used = used_["used_limit"]
        		limit = used_["uploadlimit"]
@@ -139,7 +139,7 @@ async def send_doc(client,message):
        		            total_rename(int(botid),prrename)
        		            total_size(int(botid),prsize,file.file_size)
        		        else:
-       		            used_limit(message.from_user.id,6442450944)
+       		            uploadlimit(message.from_user.id,6442450944)
        		            usertype(message.from_user.id,"Free")
 	
        		            await message.reply_text(f'Your Plane Expired On 📅 {buy_date}',quote=True)
@@ -151,7 +151,7 @@ async def send_doc(client,message):
        		    if buy_date:
        		        pre_check = check_expi(buy_date)
        		        if pre_check == False:
-       		            uploadlimit(message.from_user.id,2147483648)
+       		            uploadlimit(message.from_user.id,6442450944)
        		            usertype(message.from_user.id,"Free")
        		        
        		    filesize = humanize.naturalsize(file.file_size)
