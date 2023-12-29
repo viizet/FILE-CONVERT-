@@ -13,9 +13,12 @@ API_HASH = os.environ.get("API_HASH", "")
 STRING = os.environ.get("STRING", "")
 
 
+"")
+
+
 bot = Client(
 
-           "Rename",
+           "Renamer",
 
            bot_token=TOKEN,
 
